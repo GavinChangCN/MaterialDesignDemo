@@ -1,6 +1,8 @@
 package com.gavin.materialdesigndemo.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -12,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gavin.materialdesigndemo.Fragment.FragmentDrawer;
@@ -27,6 +30,9 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private static final int MESSAGESPAGE = 2; // 消息页Fragment位置
 
 
+    private AppBarLayout mAppBarLayout;
+    private CollapsingToolbarLayout mCollapsingToolbarLayout;
+    private ImageView mToolbarImage;
     private Toolbar mToolbar;
     private FragmentDrawer mFragmentDrawer;
 
@@ -35,7 +41,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mAppBarLayout = (AppBarLayout) findViewById(R.id.toolbarLayout);
+        mCollapsingToolbarLayout = (CollapsingToolbarLayout) mAppBarLayout.findViewById(R.id.collapsing_toolbar);
+        mToolbarImage = (ImageView) mCollapsingToolbarLayout.findViewById(R.id.toolbar_image);
+        mToolbar = (Toolbar) mCollapsingToolbarLayout.findViewById(R.id.toolbar);
+
         setSupportActionBar(mToolbar);
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -82,6 +92,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             return true;
         }
 
+        if (id == R.id.action_share) {
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -120,7 +134,8 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             fragmentTransaction.commit();
 
             // set the toolbar title
-            getSupportActionBar().setTitle(title);
+            mCollapsingToolbarLayout.setTitle(title);
+//            getSupportActionBar().setTitle(title);
         }
     }
 }

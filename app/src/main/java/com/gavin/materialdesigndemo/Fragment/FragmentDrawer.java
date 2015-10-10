@@ -2,6 +2,8 @@ package com.gavin.materialdesigndemo.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -88,18 +90,7 @@ public class FragmentDrawer extends Fragment {
                 drawerListener.onDrawerItemSelected(view, position);
                 mDrawerLayout.closeDrawer(containerView);
                 adapter.setChoosed(position);
-                Thread changeChoosedThread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-                try {
-                    changeChoosedThread.join();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                changeChoosedThread.start();
+                handler.sendEmptyMessage(0);
             }
 
             @Override
@@ -191,5 +182,18 @@ public class FragmentDrawer extends Fragment {
         public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
         }
     }
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 0:
+                    adapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
 }
