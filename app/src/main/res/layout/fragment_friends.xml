@@ -6,36 +6,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.gavin.materialdesigndemo.Fragment.HomeFragment">
+    tools:context="com.gavin.materialdesigndemo.Fragment.FriendsFragment">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_scrollFlags="scroll"
-        app:tabIndicatorColor="@color/colorPrimary"
-        app:tabSelectedTextColor="@color/colorPrimaryDark" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
+        <com.gavin.materialdesigndemo.widget.PagerSlidingTabStrip
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="48dp" >
+        </com.gavin.materialdesigndemo.widget.PagerSlidingTabStrip>
 
-    <TextView
-        android:id="@+id/label"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="100dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="45sp"
-        android:text="FRIENDS"
-        android:textStyle="bold"/>
-
-    <TextView
-        android:layout_below="@id/label"
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_marginTop="10dp"
-        android:gravity="center_horizontal"
-        android:text="Edit fragment_friends.xml to change the appearance"/>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </android.support.v4.view.ViewPager>
+    </LinearLayout>
 
 </RelativeLayout>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.gavin.materialdesigndemo.Fragment.HomeFragment">
+    tools:context="com.gavin.materialdesigndemo.Fragment.MessagesFragment">
 
     <TextView
         android:id="@+id/label"
