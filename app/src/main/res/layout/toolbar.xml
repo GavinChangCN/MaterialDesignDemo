@@ -6,4 +6,3 @@
     android:layout_height="?attr/actionBarSize"
     android:minHeight="@dimen/abc_action_bar_default_height_material"
     android:background="?attr/colorPrimary" />
-

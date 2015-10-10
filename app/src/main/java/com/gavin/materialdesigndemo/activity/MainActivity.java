@@ -3,17 +3,32 @@ package com.gavin.materialdesigndemo.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
+import com.gavin.materialdesigndemo.Fragment.FragmentDrawer;
+import com.gavin.materialdesigndemo.Fragment.FriendsFragment;
+import com.gavin.materialdesigndemo.Fragment.HomeFragment;
+import com.gavin.materialdesigndemo.Fragment.MessagesFragment;
 import com.gavin.materialdesigndemo.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+
+    private static final int HOMEPAGE = 0; // 首页Fragment位置
+    private static final int FRIENDSPAGE = 1; // 好友页Fragment位置
+    private static final int MESSAGESPAGE = 2; // 消息页Fragment位置
+
 
     private Toolbar mToolbar;
+    private FragmentDrawer mFragmentDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        mFragmentDrawer =
+                (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        mFragmentDrawer.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        mFragmentDrawer.setDrawerListener(this);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // display the first navigation drawer view on app launch
+        displayView(HOMEPAGE);
     }
 
     @Override
@@ -54,6 +77,50 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
 
+        if (id == R.id.action_search) {
+            Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
+    }
+
+    // 点击导航抽屉菜单项的选择
+    @Override
+    public void onDrawerItemSelected(View view, int position) {
+        displayView(position);
+    }
+
+    private void displayView(int position) {
+        Fragment fragment = null;
+
+        String title = getString(R.string.app_name);
+
+        switch (position) {
+            case HOMEPAGE:
+                fragment = new HomeFragment();
+                title = getString(R.string.title_home);
+                break;
+            case FRIENDSPAGE:
+                fragment = new FriendsFragment();
+                title = getString(R.string.title_friends);
+                break;
+            case MESSAGESPAGE:
+                fragment = new MessagesFragment();
+                title = getString(R.string.title_messages);
+                break;
+            default:
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.container_toolbar, fragment);
+            fragmentTransaction.commit();
+
+            // set the toolbar title
+            getSupportActionBar().setTitle(title);
+        }
     }
 }
