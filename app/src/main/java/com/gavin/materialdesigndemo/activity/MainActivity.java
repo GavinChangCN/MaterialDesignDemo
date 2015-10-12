@@ -1,5 +1,6 @@
 package com.gavin.materialdesigndemo.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -39,20 +40,29 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 设置状态栏颜色
-        // 创建状态栏的管理实例
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-        // 激活状态栏设置
-        tintManager.setStatusBarTintEnabled(true);
-        // 激活导航栏设置
-        tintManager.setNavigationBarTintEnabled(true);
-        // 设置一个颜色给系统栏
-        tintManager.setTintColor(getResources().getColor(R.color.colorPrimary));
-
         mAppBarLayout = (AppBarLayout) findViewById(R.id.toolbarLayout);
 //        mCollapsingToolbarLayout = (CollapsingToolbarLayout) mAppBarLayout.findViewById(R.id.collapsing_toolbar);
 //        mToolbarImage = (ImageView) mAppBarLayout.findViewById(R.id.toolbar_image);
         mToolbar = (Toolbar) mAppBarLayout.findViewById(R.id.toolbar);
+
+        int sysVersion = Build.VERSION.SDK_INT; // 用户设备的SDK版本s
+        // 版本在5.0以下时通过第三方插件实现状态栏颜色修改
+        if (sysVersion < 20) {
+            // 设置状态栏颜色
+            // 创建状态栏的管理实例
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            // 激活（顶部）状态栏设置
+            tintManager.setStatusBarTintEnabled(true);
+            // 激活（底部）导航栏设置
+            tintManager.setNavigationBarTintEnabled(false);
+            // 设置一个颜色给系统栏
+            tintManager.setTintColor(getResources().getColor(R.color.colorPrimary));
+
+            mAppBarLayout.setFitsSystemWindows(true);
+        } else {
+            mAppBarLayout.setFitsSystemWindows(false);
+        }
+
 
         setSupportActionBar(mToolbar);
 

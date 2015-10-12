@@ -16,7 +16,7 @@
         <com.gavin.materialdesigndemo.widget.PagerSlidingTabStrip
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="48dp" >
+            android:layout_height="30dp" >
         </com.gavin.materialdesigndemo.widget.PagerSlidingTabStrip>
 
         <android.support.v4.view.ViewPager
