@@ -20,6 +20,7 @@ import com.gavin.materialdesigndemo.Fragment.FriendsFragment;
 import com.gavin.materialdesigndemo.Fragment.HomeFragment;
 import com.gavin.materialdesigndemo.Fragment.MessagesFragment;
 import com.gavin.materialdesigndemo.R;
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
 
@@ -37,6 +38,16 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // 设置状态栏颜色
+        // 创建状态栏的管理实例
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+        // 激活状态栏设置
+        tintManager.setStatusBarTintEnabled(true);
+        // 激活导航栏设置
+        tintManager.setNavigationBarTintEnabled(true);
+        // 设置一个颜色给系统栏
+        tintManager.setTintColor(getResources().getColor(R.color.colorPrimary));
 
         mAppBarLayout = (AppBarLayout) findViewById(R.id.toolbarLayout);
 //        mCollapsingToolbarLayout = (CollapsingToolbarLayout) mAppBarLayout.findViewById(R.id.collapsing_toolbar);

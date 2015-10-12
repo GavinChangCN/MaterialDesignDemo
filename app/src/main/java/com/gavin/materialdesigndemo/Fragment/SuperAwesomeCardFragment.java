@@ -53,11 +53,11 @@ public class SuperAwesomeCardFragment extends Fragment {
                 .getDisplayMetrics());
 
         TextView v = new TextView(getActivity());
-        params.setMargins(margin, 200, margin, margin);
+        params.setMargins(margin, 300, margin, margin);
         v.setLayoutParams(params);
         v.setGravity(Gravity.CENTER_HORIZONTAL);
         v.setText(FriendsPagerAdapter.TITLES[position]);
-        v.setTextSize(90);
+        v.setTextSize(70);
 
         fl.addView(v);
         return fl;

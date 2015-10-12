@@ -34,7 +34,7 @@ public class FriendsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_friends, container, false);
         mPagerSlidingTabStrip = (PagerSlidingTabStrip) rootView.findViewById(R.id.tabs);
         mViewPager = (ViewPager) rootView.findViewById(R.id.pager);
-        mViewPager.setAdapter(new FriendsPagerAdapter(getSupportFragmentManager()));
+        mViewPager.setAdapter(new FriendsPagerAdapter(getActivity().getSupportFragmentManager()));
         mPagerSlidingTabStrip.setViewPager(mViewPager);
         mPagerSlidingTabStrip.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
@@ -52,7 +52,6 @@ public class FriendsFragment extends Fragment {
             }
         });
         initTabsValue();
-
 
         return rootView;
     }
