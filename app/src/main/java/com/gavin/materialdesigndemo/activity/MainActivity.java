@@ -14,8 +14,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.gavin.materialdesigndemo.Fragment.FragmentDrawer;
@@ -63,10 +61,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             mAppBarLayout.setFitsSystemWindows(true);
         } else {
             mAppBarLayout.setFitsSystemWindows(true);
-            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//            DrawerLayout.LayoutParams params = new DrawerLayout.LayoutParams(DrawerLayout.LayoutParams.MATCH_PARENT, DrawerLayout.LayoutParams.MATCH_PARENT);
 //            ViewGroup.MarginLayoutParams params = new ViewGroup.MarginLayoutParams(mar)
-            params.setMargins(0, 65, 0, 0);
-            findViewById(R.id.drawer_layout).setLayoutParams(params);
+//            params.setMargins(0, 65, 0, 0);
+//            findViewById(R.id.drawer_layout).setLayoutParams(params);
+
+            findViewById(R.id.toolbarLayout).setPadding(0, 65, 0, 0);
+//            findViewById(R.id.fragment_navigation_drawer).setLayoutParams(params);
         }
 
 
